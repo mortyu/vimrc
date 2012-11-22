@@ -14,18 +14,19 @@ set rulerformat=%30(%=%m%r%h%w\ %p%%\ %l:%v\ %{(&fenc!=''?&fenc:&enc).(&ff!='uni
 set laststatus=2
 set statusline=%<%F\ %m%r%h%w%=%p%%\ %l:%v\ %{(&fenc!=''?&fenc:&enc).(&ff!='unix'?','.&ff:'')}
 
-"pathogen
-call pathogen#infect()
 filetype plugin indent on 
+augroup filetype
+  au! BufRead,BufNewFile *.proto setfiletype proto
+augroup end
+
 
 "key mapping
 let mapleader=","
 map j gj
 map b F
-imap <C-[> <esc>:w<enter>
-nmap <C-[> <esc>:w<enter>
 nmap ' `
 nmap 0 ^
+
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -37,7 +38,7 @@ map <C-l> <C-W>l
 set fileencodings=utf-8,cp936,utf-8,ucs-bom
 set encoding=utf-8
 set termencoding=utf-8
-language message en_US
+language message en_US.utf8
 
 "programming
 syntax on
@@ -90,10 +91,10 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>p :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark 
 map <leader>nf :NERDTreeFind<cr>
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 50
 
 "taglist"
-let Tlist_WinWidth = 30 
+let Tlist_WinWidth = 50 
 let Tlist_Show_One_File = 1   
 let Tlist_Exit_OnlyWindow = 1
 hi MyTagListFileName ctermbg=none
@@ -111,5 +112,7 @@ function! NERDTree_IsValid()
     return 1
 endfunction
 
-"c.vim"
+"pathogen
+call pathogen#infect()
 
+let g:ctrlp_map = '<c-f>'
